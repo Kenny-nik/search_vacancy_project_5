@@ -1,5 +1,3 @@
-from typing import Any
-
 import psycopg2
 
 from config.config import config

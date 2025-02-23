@@ -29,17 +29,29 @@ class Vacancies:
         self.__url = "https://api.hh.ru/vacancies"
         self.__params["employer_id"] = employer_id
         self.__params["per_page"] = 10
-        response = requests.get(self.__url, headers=self.__headers, params=self.__params)
+        response = requests.get(
+            self.__url, headers=self.__headers, params=self.__params
+        )
         data = response.json().get("items", [])
         for vacancy in data:
             if isinstance(vacancy.get("salary"), dict):
-                if vacancy.get("salary").get("from") is None and vacancy.get("salary").get("to") is None:
+                if (
+                    vacancy.get("salary").get("from") is None
+                    and vacancy.get("salary").get("to") is None
+                ):
                     salary = "Зарплата не указана"
-                elif vacancy.get("salary").get("from") and vacancy.get("salary").get("to") is None:
+                elif (
+                    vacancy.get("salary").get("from")
+                    and vacancy.get("salary").get("to") is None
+                ):
                     salary = f"от {vacancy.get("salary").get('from')}"
-                elif vacancy.get("salary").get("from") is None and vacancy.get("salary").get("to"):
+                elif vacancy.get("salary").get("from") is None and vacancy.get(
+                    "salary"
+                ).get("to"):
                     salary = f"до {vacancy.get("salary").get('to')}"
-                elif vacancy.get("salary").get("from") and vacancy.get("salary").get("to"):
+                elif vacancy.get("salary").get("from") and vacancy.get("salary").get(
+                    "to"
+                ):
                     salary = f"{vacancy.get("salary").get('from')} - {vacancy.get("salary").get('to')}"
             elif vacancy.get("salary") is None:
                 salary = "Зарплата не указана"

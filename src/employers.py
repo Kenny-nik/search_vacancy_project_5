@@ -14,5 +14,7 @@ class Employers:
                     }
                 )
             else:
-                employers.append({"employer_name": employer, "error": "Данные отсутствуют"})
+                employers.append(
+                    {"employer_name": employer, "error": "Данные отсутствуют"}
+                )
         return employers

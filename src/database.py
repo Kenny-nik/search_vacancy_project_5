@@ -58,12 +58,16 @@ class DBCreate:
         finally:
             conn.close()
 
-    def save_data_to_database(self, employers_data: list[dict], vacancy_data: list[dict]) -> None:
+    def save_data_to_database(
+        self, employers_data: list[dict], vacancy_data: list[dict]
+    ) -> None:
         """
         Метод заполняет таблицы данными
         """
         if employers_data and vacancy_data:
-            conn = self.__conn = psycopg2.connect(dbname=self.database_name, **self.__params)
+            conn = self.__conn = psycopg2.connect(
+                dbname=self.database_name, **self.__params
+            )
 
             with conn.cursor() as cur:
                 for employer in employers_data:
@@ -72,7 +76,11 @@ class DBCreate:
                         INSERT INTO employees (employer_id, employer_name, company_url)
                         VALUES (%s, %s, %s) ON CONFLICT DO NOTHING
                         RETURNING employer_id""",
-                        (employer["employer_id"], employer["employer_name"], employer["company_url"]),
+                        (
+                            employer["employer_id"],
+                            employer["employer_name"],
+                            employer["company_url"],
+                        ),
                     )
                 for vacancy in vacancy_data:
                     cur.execute(

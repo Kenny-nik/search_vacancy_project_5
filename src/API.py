@@ -17,7 +17,9 @@ class HeadHunterAPI:
         self.__params["per_page"] = 10
         for employer in employers_list:
             self.__params["text"] = employer
-            response = requests.get(self.__url, headers=self.__headers, params=self.__params)
+            response = requests.get(
+                self.__url, headers=self.__headers, params=self.__params
+            )
             data = response.json()
             employers.append(data)
         return employers
