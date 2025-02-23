@@ -22,7 +22,7 @@
 1. Клонируйте репозиторий:
 
    ```bash
-   https://github.com
+   https://github.com/Kenny-nik/search_vacancy_project_5.git
 
 2. Установите зависимости:
     ```bash
