@@ -1,22 +1,29 @@
 import requests
 
-class Vacancies:
-    def __init__(self):
-        self.url = "https://api.hh.ru/vacancies"
-        self.headers = {"User-Agent": "HH-User-agent"}
-        self.params = {}
 
-    def get_id(self, data_list):
-        """Метод для получения id вакансий"""
+class Vacancies:
+
+    def __init__(self) -> None:
+        self.__url = "https://api.hh.ru/vacancies"
+        self.__headers = {"User-Agent": "HH-User-Agent"}
+        self.__params = {}
+
+    def get_id(self, data_list: list[dict]) -> list[str]:
+        """
+        Метод для получения id компаний
+        """
+
         employers_id = []
         for employer_id in data_list:
-            if employer_id.get('items'):
-                result = next(item for item in employer_id["items"])# проверка наличия id вакансии в словаре
-                employers_id.append(result.get['id'])
+            if employer_id.get("items"):
+                result = next(item for item in employer_id["items"])
+                employers_id.append(result.get("id"))
         return employers_id
 
-    def get_vacancies(self, employer_id):
-        """Метод для получения вакансий по id"""
+    def get_vacancies(self, employer_id: str) -> list[dict]:
+        """
+        Метод для получения данных о вакансиях по id
+        """
         list_vacancies = []
         self.__params = {}
         self.__url = "https://api.hh.ru/vacancies"
